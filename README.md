@@ -5,4 +5,4 @@ Defenders of Dievas/Rod/Ukko\
 Promote Christian Settlements\
 Accuse the Krstjani of Heresy\
 Revive Táltosism\
-Found the Kingdom of Bosnia\
+Found the Kingdom of Bosnia
