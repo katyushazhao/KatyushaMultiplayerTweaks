@@ -6,6 +6,7 @@
 - Accuse the Krstjani of Heresy
 - Revive Táltosism
 - Found the Kingdom of Bosnia
+- Restore the Kingdom of Cornwall
 
 ## Tweaks to make things easier in situations where you can't pause.
 - Auto accept indulgences (files stolen from [slaneche](https://steamcommunity.com/workshop/filedetails/?id=2724124651))

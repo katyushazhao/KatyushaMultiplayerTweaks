@@ -707,7 +707,10 @@ restore_dumnonia_decision = {
 	}
 
 	is_valid = {
-		is_independent_ruler = yes
+		OR = { #Independent or vassal of an Emperor
+			is_independent_ruler = yes
+			top_liege.primary_title.tier >= tier_empire
+		}
 		prestige_level >= very_high_prestige_level
 		has_title = title:d_cornwall
 		completely_controls = title:d_cornwall
