@@ -1,0 +1,8 @@
+﻿namespace = court_chaplain_finish
+
+court_chaplain_finish.0001 = {	
+	hidden = yes
+	immediate = {
+		chaplain_move = yes
+	}
+}

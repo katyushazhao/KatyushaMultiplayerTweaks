@@ -1,0 +1,8 @@
+﻿
+is_potential_control_county_trigger = {
+	OR = {
+		has_county_corruption_trigger = yes
+		county_control < full_county_control
+	}
+	monthly_county_control_growth_factor > 0
+}

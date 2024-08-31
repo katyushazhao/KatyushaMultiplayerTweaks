@@ -1,0 +1,150 @@
+﻿marshal_throw_move = {
+	trigger_event = marshal_finish.0001
+}
+
+marshal_move = {
+	scope:councillor_liege = {
+		if = { # Convert capital
+			limit = {
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_increase_control
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_directly_owned_province = { # Convert ruler province
+			limit = {
+				NOT = { exists = scope:councillor_on_work }
+				scope:county = {
+					is_potential_control_county_trigger = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_increase_control
+					target = prev
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_vassal = { # Convert direct vassal
+			limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_kingdom
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_duchy
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_county
+			}	
+			alternative_limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_barony
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_increase_control
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_vassal_or_below = { # Convert sub vassal
+			limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_kingdom
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_duchy
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_county
+			}	
+			alternative_limit = {
+				exists = capital_province 
+				NOT = { exists = scope:councillor_on_work }
+				capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+				highest_held_title_tier = tier_barony
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_increase_control
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_sub_realm_county = { # Convert other province
+			limit = {
+				NOT = { exists = scope:councillor_on_work }
+				title_capital_county = {
+					is_potential_control_county_trigger = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_increase_control
+					target = prev.title_capital_county.title_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+	}
+}

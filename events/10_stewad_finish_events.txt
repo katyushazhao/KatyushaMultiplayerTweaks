@@ -1,0 +1,8 @@
+﻿namespace = steward_finish
+
+steward_finish.0001 = {	
+	hidden = yes
+	immediate = {
+		steward_move = yes
+	}
+}

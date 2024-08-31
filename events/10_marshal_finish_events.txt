@@ -1,0 +1,8 @@
+﻿namespace = marshal_finish
+
+marshal_finish.0001 = {	
+	hidden = yes
+	immediate = {
+		marshal_move = yes
+	}
+}

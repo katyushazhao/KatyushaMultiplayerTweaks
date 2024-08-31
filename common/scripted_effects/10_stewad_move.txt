@@ -1,0 +1,230 @@
+﻿steward_throw_move = {
+	trigger_event = steward_finish.0001
+}
+
+steward_move = {
+	scope:councillor_liege = {
+		if = { # Convert capital
+			limit = {
+				NOT = {					
+					capital_province.culture = scope:councillor_liege.culture
+				}
+				capital_county = {
+					NOT = { has_county_block_culture_conversion_trigger = yes }
+				}
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_promote_culture
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_directly_owned_province = { # Convert ruler province
+			limit = {
+				NOR = {
+					culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				county = {
+					potential_county_culture_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_promote_culture
+					target = prev
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_vassal = { # Convert direct vassal
+			limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_kingdom
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_duchy
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_county
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}	
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_barony
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_promote_culture
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_vassal_or_below = { # Convert sub vassal
+			limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_kingdom
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_duchy
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_county
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}	
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.culture = scope:councillor_liege.culture
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_culture_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_barony
+				capital_county = {
+					potential_county_culture_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_promote_culture
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_sub_realm_county = { # Convert other province
+			limit = {
+				NOR = {
+					exists = scope:councillor_on_work
+					culture = prev.culture
+					has_county_block_culture_conversion_trigger = yes
+				}
+				county = {
+					potential_county_culture_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_promote_culture
+					target = prev.title_capital_county.title_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_sub_realm_county = { # Convert other province
+			limit = {
+				NOR = {
+					exists = scope:councillor_on_work
+					culture = prev.culture
+				}
+				county = {
+					potential_county_culture_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_promote_culture
+					target = prev.title_capital_county.title_province
+				}
+			}
+		}
+	}
+}

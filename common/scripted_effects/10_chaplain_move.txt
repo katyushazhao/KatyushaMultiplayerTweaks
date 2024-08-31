@@ -1,0 +1,250 @@
+﻿chaplain_throw_move = {
+	trigger_event = court_chaplain_finish.0001
+}
+
+chaplain_move = {
+	scope:councillor_liege = {
+		if = { # Convert capital
+			limit = {
+				NOT = {
+					capital_province.faith = scope:councillor_liege.faith
+				}
+				capital_county = {
+					NOT = { has_county_block_religion_conversion_trigger = yes }
+				}
+				capital_county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev.capital_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_directly_owned_province = { # Convert ruler province
+			limit = {
+				NOR = {
+					faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev
+				}
+				
+				
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_vassal = { # Convert direct vassal
+			limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_kingdom
+				capital_county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_duchy
+				potential_county_faith_conversion = yes
+			}
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_county
+				potential_county_faith_conversion = yes
+			}	
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_barony
+				potential_county_faith_conversion = yes
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev.capital_province
+				}
+				
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_vassal_or_below = { # Convert sub vassal
+			limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_kingdom
+				capital_county = {
+					potential_county_faith_conversion = yes
+				}
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_duchy
+				capital_county = {
+					potential_county_faith_conversion = yes
+				}
+			}			
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_county
+				capital_county = {
+					potential_county_faith_conversion = yes
+				}
+			}	
+			alternative_limit = {
+				exists = capital_province 
+				NOR = {
+					capital_province.faith = scope:councillor_liege.faith
+					exists = scope:councillor_on_work
+					capital_county = {
+						has_county_block_religion_conversion_trigger = yes
+					}
+				}
+				highest_held_title_tier = tier_barony
+				capital_county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev.capital_province
+				}
+				
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_sub_realm_county = { # Convert other province
+			limit = {
+				NOR = {
+					exists = scope:councillor_on_work
+					faith = scope:councillor_liege.faith
+					has_county_block_religion_conversion_trigger = yes
+				}
+				has_faith_block_conversion_trigger = yes
+				county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev.title_capital_county.title_province
+				}
+				save_temporary_scope_value_as = {
+					name = councillor_on_work
+					value = yes
+				}
+			}
+		}
+		random_sub_realm_county = { # Convert other province
+			limit = {
+				NOR = {
+					exists = scope:councillor_on_work
+					faith = scope:councillor_liege.faith
+					has_faith_block_conversion_trigger = no
+				}
+				has_county_block_religion_conversion_trigger = yes
+				county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev.title_capital_county.title_province
+				}
+			}
+		}
+		random_sub_realm_county = { # Convert other province
+			limit = {
+				NOR = {
+					exists = scope:councillor_on_work
+					faith = scope:councillor_liege.faith
+				}
+				county = {
+					potential_county_faith_conversion = yes
+				}
+			}
+			
+			scope:councillor = {
+				set_council_task = {
+					task_type = task_conversion
+					target = prev.title_capital_county.title_province
+				}
+			}
+		}
+	}
+}

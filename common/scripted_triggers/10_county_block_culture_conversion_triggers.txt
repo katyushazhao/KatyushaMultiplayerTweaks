@@ -1,0 +1,13 @@
+﻿
+has_county_block_culture_conversion_trigger = {
+	OR = {
+		has_county_modifier = governance_1073_conversion_resistance_modifier
+		has_county_modifier = county_shuubiyya_modifier
+		has_county_modifier = enthusiastic_nomad_settlement_saharan_modifier
+		has_county_modifier = nomad_settlement_saharan_modifier		
+	}
+}
+
+potential_county_culture_conversion = {
+
+}
